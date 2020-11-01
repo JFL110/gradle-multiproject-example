@@ -34,7 +34,7 @@ public class EbsDocker {
         String applicationPort = "8080";
 
         File dockerPath = utils.project().file("./build/docker/");
-        File dockerFile = dockerPath.toPath().resolve("Dockerfile").toFile();
+        File dockerFileFrom = utils.project().file("./build/libs/Dockerfile");
 
         // Create source set for int tests
         SourceSetContainer sourceSets = ((SourceSetContainer) utils.project().getExtensions().getByName("sourceSets"));
@@ -66,11 +66,11 @@ public class EbsDocker {
                 }
 
                 // Create Docker file if not exists
-                if (!dockerFile.exists()) {
+                if (!dockerFileFrom.exists()) {
                     try {
-                        dockerFile.createNewFile();
-                        Files.write(defaultDockerfile().getBytes(), dockerFile);
-                        utils.project().getLogger().info("Created Dockerfile at " + dockerFile);
+                        dockerFileFrom.createNewFile();
+                        Files.write(defaultDockerfile().getBytes(), dockerFileFrom);
+                        utils.project().getLogger().info("Created Dockerfile at " + dockerFileFrom);
                     } catch (IOException e) {
                         throw new RuntimeException("Could not create default Docker file", e);
                     }
@@ -82,6 +82,7 @@ public class EbsDocker {
             task.dependsOn(setupDockerDirectory, buildDependency);
             task.setGroup(GROUP);
             task.from(jarDir).include(jarName).into(dockerPath);
+            task.from(utils.project().file("./build/libs/")).include("Dockerfile").into(dockerPath);
         });
 
         TaskProvider<?> buildDocker = utils.registerTask("buildDocker", Task.class, task -> {
