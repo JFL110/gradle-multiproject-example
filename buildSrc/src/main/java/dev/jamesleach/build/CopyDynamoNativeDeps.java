@@ -21,17 +21,24 @@ class CopyDynamoNativeDeps {
     }
 
     public void create() {
+
+        utils.project().getRepositories().maven(maven -> {
+            maven.setName("mulesoft");
+            maven.setUrl("https://repository.mulesoft.org/nexus/content/repositories/public");
+        });
+
         TaskProvider<?> taskProvider = utils.registerTask(NAME, Copy.class, task -> {
             // Meta
             task.setGroup(TASK_GROUP);
 
+
             String configName = utils.getCommonConfig().getCopyNativeLibsConfiguration().getOrElse(DEFAULT_CONFIG);
             Path destination = Paths.get(utils.project().getBuildDir().getPath()).resolve("libs");
-            utils.project().getLogger().lifecycle("Copying DynamoDB native libs from '" + configName + "' into " + destination);
             task.from(utils.project().getConfigurations().getByName(configName))
                     .include("*.dll", "*.dylib", "*.so")
                     .into(destination);
 
+            task.doFirst(t -> utils.project().getLogger().lifecycle("Copying DynamoDB native libs from '" + configName + "' into " + destination));
         });
         utils.project().getTasks().findByName("test").dependsOn(taskProvider);
     }

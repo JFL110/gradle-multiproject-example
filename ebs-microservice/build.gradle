@@ -7,13 +7,6 @@ jamesBuild {
     version = '55'
 }
 
-repositories {
-    maven {
-        name = "dynamodb-local"
-        url = uri("https://repository.mulesoft.org/nexus/content/repositories/public")
-    }
-}
-
 configurations {
     resolvableTestFixturesApi { extendsFrom testFixturesApi; canBeConsumed false; canBeResolved true }
 }
