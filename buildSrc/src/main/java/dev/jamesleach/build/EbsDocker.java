@@ -62,6 +62,7 @@ public class EbsDocker {
                     if (!dockerPath.mkdir()) {
                         throw new RuntimeException("Unable to create docker working directory");
                     }
+                    utils.project().getLogger().info("Created docker directory at " + dockerPath);
                 }
 
                 // Create Docker file if not exists
@@ -69,6 +70,7 @@ public class EbsDocker {
                     try {
                         dockerFile.createNewFile();
                         Files.write(defaultDockerfile().getBytes(), dockerFile);
+                        utils.project().getLogger().info("Created Dockerfile at " + dockerFile);
                     } catch (IOException e) {
                         throw new RuntimeException("Could not create default Docker file", e);
                     }
