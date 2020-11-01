@@ -56,22 +56,24 @@ public class EbsDocker {
             task.setGroup(GROUP);
             task.dependsOn(buildDependency); // Not strictly true, could depend on a lower process
 
-            // Create docker working directory if not exists
-            if (!dockerPath.exists()) {
-                if (!dockerPath.mkdir()) {
-                    throw new RuntimeException("Unable to create docker working directory");
+            task.doLast(t -> {
+                // Create docker working directory if not exists
+                if (!dockerPath.exists()) {
+                    if (!dockerPath.mkdir()) {
+                        throw new RuntimeException("Unable to create docker working directory");
+                    }
                 }
-            }
 
-            // Create Docker file if not exists
-            if (!dockerFile.exists()) {
-                try {
-                    dockerFile.createNewFile();
-                    Files.write(defaultDockerfile().getBytes(), dockerFile);
-                } catch (IOException e) {
-                    throw new RuntimeException("Could not create default Docker file", e);
+                // Create Docker file if not exists
+                if (!dockerFile.exists()) {
+                    try {
+                        dockerFile.createNewFile();
+                        Files.write(defaultDockerfile().getBytes(), dockerFile);
+                    } catch (IOException e) {
+                        throw new RuntimeException("Could not create default Docker file", e);
+                    }
                 }
-            }
+            });
         });
 
         TaskProvider<?> copyToDockerDirectory = utils.registerTask("copyToDockerDirectory", Copy.class, task -> {
