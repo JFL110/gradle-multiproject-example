@@ -1,0 +1,16 @@
+subprojects {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven {
+            url 'https://repo.gradle.org/gradle/libs-releases-local/'
+        }
+        mavenCentral()
+    }
+}
+
+ext {
+    // Dependency versions
+    springVersion = '5.2.9.RELEASE'
+    springBootVersion = '2.3.3.RELEASE'
+}

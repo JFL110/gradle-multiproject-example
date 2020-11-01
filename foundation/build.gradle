@@ -1,0 +1,11 @@
+plugins {
+    id 'dev.jamesleach.lib'
+}
+
+dependencies {
+
+    api group: 'com.google.guava', name: 'guava', version: '30.0-jre'
+    api group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+    api group: 'org.springframework', name: 'spring-context', version: rootProject.ext.springVersion
+
+}

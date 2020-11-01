@@ -1,0 +1,21 @@
+plugins {
+    id 'dev.jamesleach.ebs'
+}
+
+jamesBuild {
+    version = "44"
+}
+
+bootJar {
+    mainClassName = 'dev.jamesleach.example.DemoEbsApp'
+}
+
+dependencies {
+
+    // Src
+    implementation project(':ebs-microservice')
+    developmentOnly group: 'org.springframework.boot', name: 'spring-boot-devtools', version: rootProject.ext.springBootVersion
+
+    // Test
+    testImplementation(testFixtures(project(":ebs-microservice")))
+}

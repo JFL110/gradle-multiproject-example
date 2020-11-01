@@ -1,0 +1,13 @@
+plugins {
+    id 'dev.jamesleach.lambda'
+}
+
+jamesBuild {
+    version = "44"
+}
+
+dependencies {
+    implementation project(':foundation')
+
+    implementation group: 'com.amazonaws', name: 'aws-lambda-java-core', version: '1.1.0'
+}

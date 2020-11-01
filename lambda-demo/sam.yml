@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Globals:
+  Api:
+    EndpointConfiguration: REGIONAL
+    Cors: 
+     AllowOrigin: "'*'"
+     AllowHeaders: "'*'"
+     AllowMethods: "'*'"
+Resources:
+  LambdaFunctionOverHttps:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 60
+      CodeUri: ./build/lambda-lambda-demo.zip
+      Handler: dev.jamesleach.example.LambdaFunctionHandler
+      Runtime: java8
+#      Environment:
+#        Variables:
+      Events:
+        HttpPost:
+          Type: Api
+          Properties:
+            Path: '/root'
+            Method: ANY
+            Auth:
+              Authorizer: NONE
+  OptionsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+# cors
+      FunctionName: options-handler
+      Handler: org.tarquinselect.missionresult.worksheet.exposure.OptionsHandler
+      Runtime: java8
+      Events:
+        Options:
+          Type: Api
+          Properties:
+            Path: /{cors+}
+            Method: OPTIONS
+            Auth:
+              Authorizer: NONE
+

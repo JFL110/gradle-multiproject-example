@@ -1,0 +1,2 @@
+rootProject.name = 'example-multiproject'
+include 'foundation', 'test-support', 'ebs-microservice', 'ebs-demo', 'lambda-demo'
