@@ -17,5 +17,7 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build -Pusername=${{ github.actor }} -Ppassword=${{ secrets.GITHUB_TOKEN }} --stacktrace --info
+    - name: Test & Check with Gradle
+      run: ./gradlew check -Pusername=${{ github.actor }} -Ppassword=${{ secrets.GITHUB_TOKEN }} --stacktrace --info
     - name: Int test with Gradle
       run: ./gradlew dockerinttest -Pusername=${{ github.actor }} -Ppassword=${{ secrets.GITHUB_TOKEN }} --stacktrace --info
