@@ -17,10 +17,16 @@ repositories {
     }
 }
 
+
 dependencies {
 
+    // -- This Plugin
+
+    // Utils
     implementation group: 'com.google.guava', name: 'guava', version: '30.0-jre'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+
+    // -- Other Plugins
 
     // Spring boot
     implementation group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.3.4.RELEASE'
@@ -31,4 +37,6 @@ dependencies {
     // Docker
     implementation group: 'com.palantir.gradle.docker', name: 'gradle-docker', version: '0.25.0'
 
+    // SCA
+    implementation 'org.apache.maven.plugins:maven-checkstyle-plugin:3.1.1'
 }
