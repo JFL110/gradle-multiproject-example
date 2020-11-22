@@ -16,6 +16,8 @@ dependencies {
     implementation project(':ebs-microservice')
     developmentOnly group: 'org.springframework.boot', name: 'spring-boot-devtools', version: rootProject.ext.springBootVersion
 
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.0'
+
     // Test
     testImplementation(testFixtures(project(":ebs-microservice")))
 }

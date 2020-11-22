@@ -8,4 +8,10 @@ dependencies {
     api group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
     api group: 'org.springframework', name: 'spring-context', version: rootProject.ext.springVersion
 
+    api group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+
+    api group: 'org.springframework', name: 'spring-aop', version: '5.3.1'
+    api group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.6'
+    api group: 'org.aspectj', name: 'aspectjrt', version: '1.9.6'
+
 }

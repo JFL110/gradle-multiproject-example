@@ -19,12 +19,10 @@ public class VersionService {
         this.versionProperties = versionProperties;
     }
 
-
     public ExposedVersion version() {
         return new ExposedVersion(
                 versionProperties.getBuildTimeMillis(),
-                versionProperties.getBuildTimeMillis() == null ? "" :
-                        ZonedDateTime.ofInstant(Instant.ofEpochMilli(versionProperties.getBuildTimeMillis()), UTC).toString(),
+                versionProperties.getBuildTimeMillis() == null ? "" :  ZonedDateTime.ofInstant(Instant.ofEpochMilli(versionProperties.getBuildTimeMillis()), UTC).toString(),
                 versionProperties.getGroupHash(),
                 versionProperties.getGitBranch(),
                 versionProperties.getGitCommit(),
