@@ -9,11 +9,6 @@ public class LambdaFunctionHandler implements RequestHandler<Object, String> {
 
     @Override
     public String handleRequest(Object input, Context context) {
-
-//        ApplicationContext c = new AnnotationConfigApplicationContext(VersionProperties.class);
-//
-//        System.out.println(c.getBean(VersionProperties.class).getBuildTimeMillis());
-
         return "abc";
     }
 }
