@@ -49,6 +49,7 @@ abstract class BasePlugin implements Plugin<Project> {
         project().getTasks().withType(Checkstyle.class).forEach(t -> {
             String config = "checkstyleMain".equals(t.getName()) ? defaultMainCheckstyleConfig.get() : defaultTestCheckstyleConfig.get();
             t.setConfig(new StringBackedTextResource(new TmpDirTemporaryFileProvider(), config));
+            t.setShowViolations(true);
         });
 
         // Add lombok
